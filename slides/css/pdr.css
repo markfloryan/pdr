@@ -68,7 +68,7 @@ p.center {
 }
 .reveal pre code { 
     max-height: 700px;
-    background-color:dimgray;
+    background-color:white;
     border-radius:7px;
     box-shadow: 5px 5px 5px black;
 }
