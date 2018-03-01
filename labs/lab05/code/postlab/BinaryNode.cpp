@@ -10,7 +10,7 @@ BinaryNode::BinaryNode()
     right = NULL;
 }
 
-BinaryNode~BinaryNode()
+BinaryNode::~BinaryNode()
 {
     delete left;
     delete right;
@@ -18,4 +18,15 @@ BinaryNode~BinaryNode()
     // to avoid crash on double deletes
     left = NULL;
     right = NULL;
+}
+
+BinaryNode& BinaryNode::operator=(const BinaryNode& other)
+{
+    if (this != &other)
+    {
+        this->value = other.value;
+        this->left = other.left;
+        this->right = other.right;
+    }
+    return *this;
 }

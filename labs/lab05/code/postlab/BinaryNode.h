@@ -6,6 +6,7 @@
 class BinaryNode {
   BinaryNode();
   ~BinaryNode();
+  BinaryNode& operator=(const BinaryNode& other);
 
   std::string value;
   BinaryNode* left;
