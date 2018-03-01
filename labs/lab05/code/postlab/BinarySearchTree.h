@@ -1,15 +1,9 @@
+// Feel free to edit this file and add functions as necessary
+
 #ifndef BST_H
 #define BST_H
 
-class BinaryNode {
-  BinaryNode();
-
-  string value;
-  BinaryNode* left;
-  BinaryNode* right;
-
-  friend class BinarySearchTree;
-};
+#include "BinaryNode.h"
 
 class BinarySearchTree {
  public:

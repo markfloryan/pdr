@@ -1,20 +1,12 @@
+// Feel free to edit this file and add functions as necessary
+
 #ifndef AVL_H
 #define AVL_H
 
+#include "AVLNode.h"
 #include <string>
 
 using namespace std;
-
-class AVLNode {
-  AVLNode();
-
-  string value;
-  AVLNode* left;
-  AVLNode* right;
-  int height;
-
-  friend class AVLTree;
-};
 
 class AVLTree {
  public:
@@ -49,17 +41,18 @@ class AVLTree {
   AVLNode* rotateRight(AVLNode*& n);
 
   // private helper for remove to allow recursion over different nodes. returns
-  // an AVLNode* that is assigned to the original node.
-  AVLNode* remove(AVLNode*& n, const string& x);
+  // an true if the node is removed; false otherwise
+  bool remove(AVLNode*& n, const string& x);
   // min finds the string with the smallest value in a subtree.
   string min(AVLNode* node) const;
   // height returns the value of the height field in a node. If the node is
-  // null, it returns -1.
+  // null, it returns 0.
   int height(AVLNode* node) const;
 
   // Any other methods you need...
 };
 
+// non-member(s)
 // max returns the greater of two integers.
 int max(int a, int b);
 
