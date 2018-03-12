@@ -1,8 +1,9 @@
 // Feel free to edit this file and add functions as necessary
-
 #include "AVLTree.h"
 #include "AVLNode.h"
 #include <string>
+#include <iostream>
+#include <iomanip> //for setw in postorder
 
 using namespace std;
 
@@ -12,34 +13,36 @@ AVLTree::AVLTree() { }
 AVLTree::~AVLTree() { }
 
 void AVLTree::insert(const string& x) { }
-string AVLTree::pathTo(const string& x) const { }
-bool AVLTree::find(const string& x) const { }
-int AVLTree::numNodes() const { }
+string AVLTree::pathTo(const string& x) const { return ""; }
+bool AVLTree::find(const string& x) const { return false; }
+int AVLTree::numNodes() const { return -1; }
+// balance should balance only the single node it is given
 void AVLTree::balance(AVLNode*& n) { }
-AVLNode* AVLTree::rotateLeft(AVLNode*& n) { }
-AVLNode* AVLTree::rotateRight(AVLNode*& n) { }
+AVLNode* AVLTree::rotateLeft(AVLNode*& n) { return NULL; }
+AVLNode* AVLTree::rotateRight(AVLNode*& n) { return NULL; }
 
 /** The following are implemented for you: remove, max, min, and height;
 remove finds x's position in the tree and removes it, rebalancing as necessary. **/
-void AVLTree::remove(const string& x) { if(remove(root, x)) balance(root); }
+void AVLTree::remove(const string& x) { remove(root, x); }
 
 /** private helper for remove to allow recursion over different nodes; 
 returns an AVLNode* that is assigned to the original node. **/
 bool AVLTree::remove(AVLNode*& current, const string& x) {
+  bool returnVal = false;
   // base-case for x not present in tree
   if (current == NULL) 
   {
-    return false;
+    returnVal = false;
   }
   // recursively approach base case to left
   else if (x < current->value)
   {
-    return remove(current->left, x);
+    returnVal = remove(current->left, x);
   }
   // recursively approach base case to right
   else if (x > current->value)
   {
-    return remove(current->right, x);
+    returnVal = remove(current->right, x);
   }
   // base-case for x present in tree
   else
@@ -49,7 +52,7 @@ bool AVLTree::remove(AVLNode*& current, const string& x) {
     {
       delete current;
       current = NULL;
-      return (current == NULL); // should be true
+      returnVal = (current == NULL); // should be true
     }
     // two children
     else if (current-> left != NULL && current->right != NULL)
@@ -66,8 +69,8 @@ bool AVLTree::remove(AVLNode*& current, const string& x) {
       current->value = rLMost->value;
       // this should immediately reach either base-case present
       // with (above) no children or (below) one child, the right
-      // just one more recurse.
-      return remove(rLMost, rLMost->value);
+      // just log more recurse; runtime preserved. 
+      returnVal = remove(current->right, rLMost->value);
     }
     // one child
     else
@@ -80,9 +83,11 @@ bool AVLTree::remove(AVLNode*& current, const string& x) {
       current->height = heightTemp;
       delete child;
       child = NULL;
-      return (child == NULL); //should be true
+      returnVal = (child == NULL); //should be true
     }
   }
+  balance(current);
+  return returnVal;
   // recall that if this returns true, balance(root) will be called, fixing any inbalance
 }
 
@@ -102,6 +107,23 @@ int AVLTree::height(AVLNode* node) const {
     return 0;
   }
   return node->height;
+}
+
+void AVLTree::print()
+{
+  postorder(root, 0);
+}
+
+void AVLTree::postorder(AVLNode*& current, int indent)
+{
+    if(current != NULL) {
+        if(current->left != NULL) postorder(current->left, indent+4);
+        if(current->right != NULL) postorder(current->right, indent+4);
+        if (indent) {
+            std::cout << std::setw(indent) << ' ';
+        }
+        std::cout << current->value << std::endl;
+    }
 }
 
 // non-member(s)

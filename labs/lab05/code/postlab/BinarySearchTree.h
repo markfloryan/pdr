@@ -5,6 +5,8 @@
 
 #include "BinaryNode.h"
 
+using namespace std;
+
 class BinarySearchTree {
  public:
   BinarySearchTree();
@@ -22,12 +24,19 @@ class BinarySearchTree {
   bool find(const string& x) const;
   // numNodes returns the total number of nodes in the tree.
   int numNodes() const;
+  
+  void print();
 
  private:
   // Declare a root node
   BinaryNode* root;
 
+  // prints a subtree
+  // call on root for postorder of full tree
+  void postorder(BinaryNode* &current, int indent);
+
   // Any other methods you need...
 };
+
 
 #endif

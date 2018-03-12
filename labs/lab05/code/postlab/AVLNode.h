@@ -11,7 +11,7 @@ class AVLNode {
   std::string value;
   AVLNode* left;
   AVLNode* right;
-  int depth;
+  int height;
 
   friend class AVLTree;
 };

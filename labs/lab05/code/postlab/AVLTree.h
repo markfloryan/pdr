@@ -28,12 +28,14 @@ class AVLTree {
   // numNodes returns the total number of nodes in the tree.
   int numNodes() const;
 
+  void print();
+
  private:
   // Declare a root node
   AVLNode* root;
 
-  // balance makes sure that the subtree with root n maintains the AVL tree
-  // property, namely that the balance factor of n is either -1, 0, or 1.
+  // balance should balance only the single node it is given
+  // that the balance factor of n is either -1, 0, or 1.
   void balance(AVLNode*& n);
   // rotateLeft performs a single rotation on node n with its left child.
   AVLNode* rotateLeft(AVLNode*& n);
@@ -48,6 +50,10 @@ class AVLTree {
   // height returns the value of the height field in a node. If the node is
   // null, it returns 0.
   int height(AVLNode* node) const;
+
+  // prints a subtree
+  // call on root for postorder of full tree
+  void postorder(AVLNode* &current, int indent);
 
   // Any other methods you need...
 };
