@@ -191,17 +191,28 @@ Your task for the in-lab is to implement the `mergeSort` function in mergeSort.s
 ### Sample Execution Run
 
 Below is a sample execution run to show you the input and output format we are looking for.
-
-    Enter the array size: 5
-    Enter value 0: -7
-    Enter value 1: 2
-    Enter value 2: -39
-    Enter value 3: 12
-    Enter value 4: 8
-    Unsorted array: -7 2 -39 12 8 
-    Sorted array: -39 -7 2 8 12
-
-The following resource explains the merge sort algorithm. This is what you need to implement in x86 assembly: [www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/](https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/)
+```
+Enter the array size: 5
+Enter value 0: -7
+Enter value 1: 2
+Enter value 2: -39
+Enter value 3: 12
+Enter value 4: 8
+Unsorted array: -7 2 -39 12 8 
+Sorted array: -39 -7 2 8 12
+```
+The following resource explains the merge sort algorithm. This is what you need to implement in x86 assembly: [www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/](https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/). The C source for mergeSort is copied here for your convenience.
+```
+void mergeSort(int *arr, int left, int right) {
+	if (left < right) {
+		int mid = (left + right) / 2;
+		mergeSort(arr, left, mid);
+		mergeSort(arr, mid+1, right);
+		merge(arr, left, mid, right);
+	}
+}
+```
+When computing mid, you may want to use a bitwise-shift to more efficiently divide the value by 2. When dividing by powers of 2, we can avoid the cost of DIV or IDIV, and shift right by using SHR or SAR.
 
 Once you have completed the in-lab, submit mergeSort.s, testMergeSort.cpp, and your Makefile. **If you finish the in-lab early, you should begin working on the post-lab report.**
 

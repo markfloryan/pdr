@@ -171,7 +171,16 @@ Enter value 3: 12
 Enter value 4: 8
 Unsorted array: -7 2 -39 12 8 
 Sorted array: -39 -7 2 8 12</code></pre>
-<p>The following resource explains the merge sort algorithm. This is what you need to implement in x86 assembly: <a href="https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/">www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/</a></p>
+<p>The following resource explains the merge sort algorithm. This is what you need to implement in x86 assembly: <a href="https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/">www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/</a>. The C source for mergeSort is copied here for your convenience.</p>
+<pre><code>void mergeSort(int *arr, int left, int right) {
+    if (left &lt; right) {
+        int mid = (left + right) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid+1, right);
+        merge(arr, left, mid, right);
+    }
+}</code></pre>
+<p>When computing mid, you may want to use a bitwise-shift to more efficiently divide the value by 2. When dividing by powers of 2, we can avoid the cost of DIV or IDIV, and shift right by using SHR or SAR.</p>
 <p>Once you have completed the in-lab, submit mergeSort.s, testMergeSort.cpp, and your Makefile. <strong>If you finish the in-lab early, you should begin working on the post-lab report.</strong></p>
 <hr />
 <h2 id="post-lab-1">Post-lab</h2>
