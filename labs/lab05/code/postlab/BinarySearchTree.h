@@ -1,15 +1,11 @@
+// Feel free to edit this file and add functions as necessary
+
 #ifndef BST_H
 #define BST_H
 
-class BinaryNode {
-  BinaryNode();
+#include "BinaryNode.h"
 
-  string value;
-  BinaryNode* left;
-  BinaryNode* right;
-
-  friend class BinarySearchTree;
-};
+using namespace std;
 
 class BinarySearchTree {
  public:
@@ -28,12 +24,19 @@ class BinarySearchTree {
   bool find(const string& x) const;
   // numNodes returns the total number of nodes in the tree.
   int numNodes() const;
+  
+  void print();
 
  private:
   // Declare a root node
   BinaryNode* root;
 
+  // prints a subtree
+  // call on root for postorder of full tree
+  void postorder(BinaryNode* &current, int indent);
+
   // Any other methods you need...
 };
+
 
 #endif
